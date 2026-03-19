@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "rootDir": ".",
-    "types": ["vitest/globals"],
-
-    "jsx": "react",
     "module": "ESNext",
-    "declaration": true,
-    "declarationDir": "types",
-    "sourceMap": true,
-    "outDir": "dist",
     "moduleResolution": "node",
+    "jsx": "react-jsx",
+
+    "strict": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "emitDeclarationOnly": true
-  }
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    "sourceMap": true,
+    "noEmit": true,
+
+    "types": ["vitest/globals"]
+  },
+  "include": ["src", ".storybook", "**/*.ts", "**/*.tsx"],
+  "exclude": ["dist", "node_modules"]
 }

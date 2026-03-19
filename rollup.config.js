@@ -1,49 +1,45 @@
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import typescript from "@rollup/plugin-typescript";
-import dts from "rollup-plugin-dts";
-import terser from "@rollup/plugin-terser";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import postcss from "rollup-plugin-postcss";
-
-import packageJson from "./package.json";
+import resolve from "@rollup/plugin-node-resolve"
+import commonjs from "@rollup/plugin-commonjs"
+import typescript from "@rollup/plugin-typescript"
+import dts from "rollup-plugin-dts"
+import terser from "@rollup/plugin-terser"
+import peerDepsExternal from "rollup-plugin-peer-deps-external"
+import postcss from "rollup-plugin-postcss"
 
 export default [
   {
     input: "src/index.ts",
     output: [
       {
-        file: packageJson.main,
+        file: "dist/index.esm.js",
         format: "esm",
         sourcemap: true,
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-        },
+      },
+      {
+        file: "dist/index.cjs.js",
+        format: "cjs",
+        sourcemap: true,
+        exports: "named",
       },
     ],
     external: ["react", "react-dom"],
     plugins: [
-      typescript({
-        declaration: true,
-        declarationDir: "dist/cjs",
-        outDir: "dist",
-      }),
-
       peerDepsExternal(),
       resolve(),
       commonjs(),
-      terser(),
       postcss({
         extract: true,
       }),
+      typescript({
+        tsconfig: "./tsconfig.build.json",
+      }),
+      terser(),
     ],
   },
-
   {
-    input: "dist/cjs/src/index.d.ts",
+    input: "dist/types/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
-    plugins: [dts.default()],
+    plugins: [dts()],
     external: [/\.css$/],
   },
-];
+]
