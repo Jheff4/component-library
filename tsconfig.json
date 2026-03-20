@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
 
     "strict": true,
@@ -14,7 +14,7 @@
     "sourceMap": true,
     "noEmit": true,
 
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "node"]
   },
   "include": ["src", ".storybook", "**/*.ts", "**/*.tsx"],
   "exclude": ["dist", "node_modules"]
