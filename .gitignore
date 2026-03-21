@@ -2,3 +2,6 @@
 
 *storybook.log
 storybook-static
+
+dist
+.rollup.cache
